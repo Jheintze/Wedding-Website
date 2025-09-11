@@ -83,7 +83,7 @@ header {
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: #fcf6ec; /* keep your original color */
+  background-color: #fcf6ec; 
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -261,7 +261,9 @@ nav ul {
   display: block;
   margin-top: 2rem;
 }
-
+#dresscode-title{
+  margin-top:3em;
+}
 /* Each hotel card */
 .hotel-item {
   padding: 1.5rem;
@@ -305,7 +307,7 @@ nav ul {
   margin-bottom: 2rem;
 }
 
-#gifts-list li {
+#gifts-list li,#program-schedule {
   padding: 1.5rem 1rem;
   background-color: #fcf6ec; /* lighter than #f8f3ef main tone */
   border-radius: 8px;
@@ -322,10 +324,14 @@ nav ul {
   display: block;
   margin-bottom: 0.5rem;
 }
+.rsvp-pic{
+  margin-top:-4rem;
+}
 footer {
-  background-color: #F9F0E3; /* same as navbar */
-  padding: 1.5rem 2rem;
-  box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+  background-color: #fbeee0; /* same as navbar */
+  padding: 1.5rem 2rem;  
+     /* Use inset shadow to give same "weight" as header */
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.05), 0 -2px 5px rgba(0,0,0,0.1);
 }
 
 .footer-container {
@@ -450,6 +456,14 @@ footer {
   .hotel-pic {
     width: 18rem;
     height: 18rem;
+  }
+  .illustrations{
+    max-width:70%;
+    width:70%;
+  }
+  .rsvp-pic{
+    max-width:85%;
+    width:85%
   }
 }
 @media (hover: hover) {
