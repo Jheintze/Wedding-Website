@@ -40,7 +40,7 @@ li + li {
 
 /* Body content links (including #location-text) */
 a {
-  color: #7D3922;
+  color: #3A1306; /* rich dark brown */
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: underline;
@@ -250,18 +250,9 @@ nav ul {
   margin-top: 1rem;
   margin-bottom: 1.5rem;
 }
-
-#location-text a {
-  font-weight: bold;
-  color: #3A1306; /* rich dark brown */
-  /* text-decoration: underline; <-- inherited from base 'a' */
-}
-
-#location-text a:hover {
-  color: #7D3922;
-  /* underline already shown by default */
-}
-
+#from-airport-title,#from-bus-station-title{
+  margin-top:3.5em;
+} 
 .responsive-map {
   width: 100%;
   max-width: 800px;
@@ -269,7 +260,6 @@ nav ul {
   height: auto;
   display: block;
   margin-top: 2rem;
-  
 }
 
 /* Each hotel card */

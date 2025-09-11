@@ -262,24 +262,31 @@ document.addEventListener("DOMContentLoaded", function () {
 // animation for landing page
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hero = document.querySelector('.hero-container');
-  const navbar = document.querySelector('header');
+  const hero = document.querySelector(".hero-container");
+  const navbar = document.querySelector("header");
 
   // Step 2: Fade to color
   setTimeout(() => {
-    hero.classList.add('step-color');
+    hero.classList.add("step-color");
   }, 300); // ~2s after BW fade starts
 
   // Navbar show/hide on scroll
   const updateNavbar = () => {
-    if (window.scrollY > 0) {
-      navbar.classList.remove('hidden');
+    // Only run hide/show logic on desktop
+    if (window.innerWidth > 768) {
+      if (window.scrollY > 0) {
+        navbar.classList.remove("hidden");
+      } else {
+        navbar.classList.add("hidden");
+      }
     } else {
-      navbar.classList.add('hidden');
+      // On mobile: always visible
+      navbar.classList.remove("hidden");
     }
   };
 
-  window.addEventListener('scroll', updateNavbar);
+  window.addEventListener("scroll", updateNavbar);
+  window.addEventListener("resize", updateNavbar); // re-check on resize
   updateNavbar(); // initial check on page load
 });
 
