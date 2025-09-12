@@ -235,6 +235,8 @@ document.addEventListener("DOMContentLoaded", function () {
   if (toggleBtn && navList) {
     toggleBtn.addEventListener("click", () => {
       navList.classList.toggle("show");
+      const isOpen = navList.classList.contains("show");
+      toggleBtn.setAttribute("aria-expanded", isOpen);
     });
 
     // Close menu when nav link is clicked (only after navList is confirmed)
