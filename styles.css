@@ -2,15 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color:#7D3922;
-  
 }
 
-body{
+/* Global Styles */
+
+body {
   background-color: #F9F0E3;
   font-family: "Garamond", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-   font-size: 1.3rem;
-   font-weight: 400;
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: #7D3922;
 }
 
 section {
@@ -18,13 +19,20 @@ section {
   padding: 0 1rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 2rem;
   margin-bottom: 2rem;
   line-height: 1.2;
 }
 
-p, ul, ol {
+p,
+ul,
+ol {
   margin-top: 1rem;
   margin-bottom: 1rem;
   line-height: 1.6;
@@ -38,23 +46,24 @@ li + li {
   margin-top: 0.5rem;
 }
 
-/* Body content links (including #location-text) */
+/* Links */
+
 a {
-  color: #3A1306; /* rich dark brown */
+  color: #3A1306;
   font-weight: bold;
   font-size: 1.5rem;
   text-decoration: underline;
-  text-underline-offset: 3px; /* spacing */
+  text-underline-offset: 3px;
   transition: color 0.3s ease;
 }
 
 a:hover,
 a:focus {
   color: #C08A45;
-  /* keep underline on hover for consistency and clarity */
 }
 
-/* Navbar links - no underline, color change on hover */
+/* Navigation links use no underline */
+
 nav a {
   text-decoration: none;
 }
@@ -64,6 +73,8 @@ nav a:focus {
   color: #C08A45;
 }
 
+/* General Layout */
+
 .flex {
   display: flex;
   flex-direction: column;
@@ -72,18 +83,22 @@ nav a:focus {
   padding: 4rem 2rem;
   text-align: center;
 }
+
 .narrow {
   max-width: 650px;
   width: 80%;
   margin: 0 auto;
 }
+
+/* Header & Navigation */
+
 header {
-  position: fixed; /* changed from sticky */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 100;
-  background-color: #fcf6ec; 
+  background-color: #fcf6ec;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.4s ease-in-out;
 }
@@ -103,29 +118,19 @@ header.hidden {
 
 .nav {
   display: flex;
-  /* justify-content: space-between; */
-  /* flex-grow:1; */
   align-items: center;
   width: 100%;
 }
 
-.nav__toggle {
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-left: 1rem;
-}
 .nav__side {
   flex: 1;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   padding-right: 2rem;
-
-  align-items: center;
-  gap:1rem;
+  gap: 1rem;
 }
+
 .nav__side--left {
   justify-content: flex-start;
   padding-left: 2rem;
@@ -133,70 +138,76 @@ header.hidden {
 
 .nav__side--right {
   justify-content: flex-end;
-  gap: 1rem;
   padding-right: 2rem;
+  gap: 1rem;
 }
+
 nav ul {
   display: flex;
-  list-style: none;
   justify-content: center;
   gap: 2rem;
   padding: 0;
   margin: 0;
+  list-style: none;
 }
 
-.nav__list:last-child {
-  justify-content: flex-end;
-  flex: 0;
-  margin-right: 2rem;
-}
 .nav__list--primary {
   margin: 0 auto;
-   padding-left: 0;
+  padding-left: 0;
 }
+
 .nav__list--primary li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
-#translate-btn {
- /* no border button */
-  background:none;
+
+.nav__toggle {
+  display: none;
+  margin-left: 1rem;
+  font-size: 2rem;
+  background: none;
   border: none;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
   cursor: pointer;
+}
+
+#translate-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
   border-radius: 4px;
   font-weight: bold;
   font-size: 1rem;
-  align-items:center;
-  gap:0.5rem;
-  display: flex;
-  margin-top:0.3rem;
+  cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-/* Touch devices: show highlight when tapping */
+
 #translate-btn:active {
   background-color: #C08A45;
   color: #fff;
 }
 
 .flag-icon {
-  height: 1em;
   width: auto;
-  transform:translateY(-1px);
+  height: 1em;
+  transform: translateY(-1px);
 }
- /* landing pic animation */
+
+/* Landing / Hero */
 
 .hero-container {
   position: relative;
   width: 100%;
-  height: 100vh; /* full viewport height */
-  overflow: hidden; /* crop any overflow */
+  height: 100vh;
   max-height: 800px;
+  overflow: hidden;
 }
+
 .hero-container img {
-  object-fit: contain; /* or contain if you prefer seeing entire image */
   position: absolute;
   width: 100%;
   height: 100%;
@@ -204,18 +215,19 @@ nav ul {
   transition: opacity 3s ease, filter 3s ease;
 }
 
-/* BW image defines height and scales to fit */
+/* Black-and-white image shown initially */
+
 .bw {
   position: relative;
+  display: block;
   width: 100%;
   height: 100%;
-   /* keep aspect ratio, crop if needed */
-  display: block;
-   opacity: 1;
+  opacity: 1;
   z-index: 1;
 }
 
-/* Color image stacked on top */
+/* Color image fades in over the black-and-white image */
+
 .color {
   position: absolute;
   top: 0;
@@ -225,112 +237,131 @@ nav ul {
   object-fit: cover;
   opacity: 0;
   z-index: 2;
-   filter: grayscale(100%);
+  filter: grayscale(100%);
 }
 
-/* Step 1: Fade in BW version of color image
-.hero-container.step-bw .color {
-  opacity: 1;
-} */
+/* Switch the hero image to full color */
 
-/* Step 2: Remove grayscale → full color */
 .hero-container.step-color .color {
   filter: grayscale(0%);
   opacity: 1;
 }
 
+/* Images & Illustrations */
+
 .pic {
   display: block;
-  max-width: 800px; /* Set the maximum width */
-  width: 100%; /* Make it responsive */
-  height: auto; /* Preserve proportions */
-  margin: 0 auto; /* Center it horizontally */
-  border-radius: 8px; /* rounded corners */
-  margin-top: 1rem;
-  margin-bottom: 1.5rem;
-}
-#from-airport-title,#from-bus-station-title{
-  margin-top:3.5em;
-} 
-.responsive-map {
-  width: 100%;
   max-width: 800px;
-  aspect-ratio: 4 / 3; /* or 16 / 9 for wider */
+  width: 100%;
   height: auto;
-  display: block;
-  margin-top: 2rem;
-}
-#dresscode-title{
-  margin-top:3em;
-}
-/* Each hotel card */
-.hotel-item {
-  padding: 1.5rem;
-  margin-top:2rem;
-  text-align: center; /* centers image and text */
-}
-.hotel-item p{
-  margin-top:0.5rem;
-}
-.hotel-item h3{
-  margin-bottom:1rem;
-}
-.hotel-pic {
-  width: 10rem;               /* responsive unit */
-  height: 10rem;
-  max-width: 1200px;          /* cap size */
-  border-radius: 50%;        /* make it a perfect circle */
-  object-fit: cover;         /* crop nicely */
-  display: block;
-  margin: 0 auto 0.75rem;    /* center + space below */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* subtle shadow */
+  margin: 1rem auto 1.5rem;
+  border-radius: 8px;
 }
 
 .illustrations {
-  display: block;            /* so margin auto works */
-  max-width:100%;          /* limits image size on big screens */
-  width: 100%;               /* responsive scaling */
-  height: auto;              /* keeps proportions */
-  margin: 1.5rem auto;       /* centers horizontally with space above/below */
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  margin: 1.5rem auto;
 }
-.canadita-logo{
-  display: block;            /* so margin auto works */
-  max-width:40%;          /* limits image size on big screens */
-  width: 40%;               /* responsive scaling */
-  height: auto;              /* keeps proportions */
-  margin: 1.5rem auto;       /* centers horizontally with space above/below */
+
+.canadita-logo {
+  display: block;
+  max-width: 40%;
+  width: 40%;
+  height: auto;
+  margin: 1.5rem auto;
 }
+
+/* Location & Directions */
+
+#from-airport-title,
+#from-bus-station-title {
+  margin-top: 3.5em;
+}
+
+.responsive-map {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  margin-top: 2rem;
+}
+
+/* Program & Dress Code */
+
+#dresscode-title {
+  margin-top: 3em;
+}
+
+/* Accommodations */
+
+.hotel-item {
+  padding: 1.5rem;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.hotel-item p {
+  margin-top: 0.5rem;
+}
+
+.hotel-item h3 {
+  margin-bottom: 1rem;
+}
+
+.hotel-pic {
+  display: block;
+  width: 10rem;
+  height: 10rem;
+  max-width: 1200px;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Gifts & Program Schedule */
 
 #gifts-list {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-#gifts-list li,#program-schedule {
+#gifts-list li,
+#program-schedule {
   padding: 1.5rem 1rem;
-  background-color: #fcf6ec; /* lighter than #f8f3ef main tone */
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
   margin-bottom: 1.5rem;
+  background-color: #fcf6ec;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   text-align: center;
-  line-height: 1.6; /* easier to read */
-  font-size: 1.2rem; /* bigger text for everything */
+  line-height: 1.6;
+  font-size: 1.2rem;
 }
-
 
 #gifts-list strong {
-  font-size: 1.6rem; /* heading bigger than body */
   display: block;
   margin-bottom: 0.5rem;
+  font-size: 1.6rem;
 }
-.rsvp-pic{
-  margin-top:-2rem;
+
+/* RSVP */
+
+.rsvp-pic {
+  margin-top: -2rem;
 }
+
+/* Footer */
+
 footer {
-  background-color: #fbeee0; /* same as navbar */
-  padding: 1.5rem 2rem;  
-     /* Use inset shadow to give same "weight" as header */
-  box-shadow: inset 0 1px 0 rgba(0,0,0,0.05), 0 -2px 5px rgba(0,0,0,0.1);
+  padding: 1.5rem 2rem;
+  background-color: #fbeee0;
+  box-shadow:
+    inset 0 1px 0 rgba(0, 0, 0, 0.05),
+    0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .footer-container {
@@ -347,15 +378,15 @@ footer {
 .footer-center,
 .footer-right {
   font-family: "Garamond", "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 0.85rem; /* subtle, uniform size */
+  font-size: 0.85rem;
   color: #7D3922;
 }
 
 .footer-left a {
   color: #7D3922;
+  font-size: 0.85rem;
   text-decoration: underline;
   text-underline-offset: 2px;
-  font-size: 0.85rem; /* match surrounding text */
 }
 
 .footer-left a:hover,
@@ -363,24 +394,27 @@ footer {
   color: #C08A45;
 }
 
-/* Back to top button */
+/* Back to Top */
+
 #back-to-top {
-  color: #7D3922; /* same as footer text */
-  background: none; /* remove background */
-  border: none; /* no border */
-  padding: 0; /* minimal padding */
-  font-size: 0.9rem; /* subtle size, same as footer text */
+  padding: 0;
+  background: none;
+  border: none;
+  color: #7D3922;
+  font-size: 0.9rem;
+  text-decoration: none;
   cursor: pointer;
-  text-decoration: none; /* remove underline */
   transition: color 0.3s ease;
 }
 
 #back-to-top:hover {
-  color: #C08A45; /* subtle hover color, same tone as other links */
+  color: #C08A45;
 }
 
+/* Mobile */
+
 @media (max-width: 768px) {
-   section{
+  section {
     margin-top: 0.1rem;
     margin-bottom: 0.1rem;
   }
@@ -390,90 +424,110 @@ footer {
     margin-bottom: 1rem;
   }
 
-  p, ul, ol {
+  p,
+  ul,
+  ol {
     margin-top: 0.75rem;
     margin-bottom: 0.75rem;
   }
+
   .nav {
     flex-direction: column;
-    align-items:stretch;
-  }
-  .nav__side{
-    width:100%;
-    justify-content: flex-end;
-    padding:0 1rem;
-    order:1;
-  }
-  .nav__toggle {
-    display: block;
-    margin:0;
+    align-items: stretch;
   }
 
- .nav__list--primary {
-  flex-direction: column;
-  background-color: #fcf6ec;;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  padding: 0 1rem;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition:none;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 99;
-  gap: 0.3rem;
-}
-.nav__list--primary li {
-    margin: 0.25rem 0; /* smaller vertical space */
+  .nav__side {
+    width: 100%;
+    justify-content: flex-end;
+    padding: 0 1rem;
+    order: 1;
   }
-.nav__list--primary.show {
-  max-height: 500px; /* enough for all links */
-  opacity: 1;
-  pointer-events: auto;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
-}
-#translate-btn{
-  margin-right:-0.5rem;
-  display: flex;
-  align-items: center;
-}
- .footer-container {
+
+  .nav__toggle {
+    display: block;
+    margin: 0;
+  }
+
+  /* Collapsed mobile navigation menu */
+
+  .nav__list--primary {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0 1rem;
+    background-color: #fcf6ec;
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+    transition: none;
+  }
+
+  .nav__list--primary li {
+    margin: 0.25rem 0;
+  }
+
+  /* Open mobile navigation menu */
+
+  .nav__list--primary.show {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+  }
+
+  #translate-btn {
+    display: flex;
+    align-items: center;
+    margin-right: -0.5rem;
+  }
+
+  /* Stack footer content vertically on mobile */
+
+  .footer-container {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+
   .footer-left,
   .footer-center,
   .footer-right {
     margin: 0.3rem 0;
   }
 }
+
+/* Large Screens */
+
 @media (min-width: 1024px) {
   .hotel-pic {
     width: 18rem;
     height: 18rem;
   }
-  .illustrations{
-    max-width:70%;
-    width:70%;
+
+  .illustrations {
+    max-width: 70%;
+    width: 70%;
   }
-  .rsvp-pic{
-    max-width:85%;
-    width:85%;
-    margin-top:-5rem;
+
+  .rsvp-pic {
+    max-width: 85%;
+    width: 85%;
+    margin-top: -5rem;
   }
 }
+
+/* Hover-capable Devices */
+
 @media (hover: hover) {
   #translate-btn:hover {
     background-color: #C08A45;
     color: #fff;
   }
 }
-
-
-
-
-
