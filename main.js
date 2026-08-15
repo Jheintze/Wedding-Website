@@ -1,6 +1,7 @@
-// // Smooth scroll to section with offset for fixed navbar
+/* Smooth Scrolling */
 
-document.addEventListener("DOMContentLoaded", function () {
+// Smooth scroll to sections while accounting for the fixed navbar
+function initSmoothScrolling() {
   const navbar = document.querySelector("header");
 
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -8,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const targetId = this.getAttribute("href").substring(1);
       const targetElement = document.getElementById(targetId);
 
-      if (!targetElement) return;
+      if (!targetElement || !navbar) return;
 
       e.preventDefault();
 
@@ -23,9 +24,10 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   });
-});
+}
 
-// js object for translations
+/* Translations */
+
 const translations = {
   en: {
     "translate-text": "ES",
@@ -99,13 +101,14 @@ const translations = {
       <li><strong>Barong Tagalog</strong> — una prenda tradicional filipina hecha de tela ligera con bordados finos, perfecta para climas cálidos.</li>
       <li><strong>Guayabera</strong> — una camisa de lino o algodón, a menudo bordada, y también una excelente opción para un evento formal al aire libre.</li>
     `,
-    "dresscode-pinterest": "Para más ideas e inspiración, puedes consultar nuestro ",
+    "dresscode-pinterest":
+      "Para más ideas e inspiración, puedes consultar nuestro ",
 
     "accommodations-title": "Alojamiento",
     "accommodations-intro": `
       Hemos preparado una selección de hoteles recomendados para tu estadía
       en Cuernavaca, todos ofreciendo tarifas especiales para nuestros invitados de boda.
-      El transporte al lugar del evento también estará disponible desde estos hoteles — ¡no olvides preguntar por ello al hacer el check‑in!
+      El transporte al lugar del evento también estará disponible desde estos hoteles — ¡no olvides preguntar por ello al hacer el check-in!
     `,
     "hotel-cala-blanca-desc":
       "Este hotel boutique está más cerca del lugar — a solo 5 minutos caminando.",
@@ -159,42 +162,50 @@ const translations = {
 };
 
 const originalText = {};
+let currentLang = "en";
 
-// Save original English text content on page load
+// Save original English text so it can be restored when switching back
 function cacheOriginalText() {
   const allIds = Array.from(
-    new Set([...Object.keys(translations.en), ...Object.keys(translations.es)])
-  ); // all translatable element IDs
+    new Set([...Object.keys(translations.en), ...Object.keys(translations.es)]),
+  );
+
   allIds.forEach((id) => {
     const el = document.getElementById(id);
+
     if (el) {
       if (el.tagName === "TITLE") {
         originalText[id] = document.title;
       } else {
-        originalText[id] = el.innerHTML; // save with innerHTML to preserve lists, links, formatting
+        // Preserve links, lists, and other HTML markup
+        originalText[id] = el.innerHTML;
       }
     }
   });
 }
 
+// Apply the selected language to all translatable elements
 function applyTranslations(lang) {
   if (lang === "es") {
-    // Apply Spanish translations
     const entries = translations.es;
+
     for (const id in entries) {
       const el = document.getElementById(id);
+
       if (el) {
         if (el.tagName === "TITLE") {
           document.title = entries[id];
         } else {
-          el.innerHTML = entries[id]; // use innerHTML for all to preserve markup (works with plain text too)
+          // innerHTML allows translations to contain links and other markup
+          el.innerHTML = entries[id];
         }
       }
     }
   } else {
-    // Revert to original English from cached values
+    // Restore the original English content
     for (const id in originalText) {
       const el = document.getElementById(id);
+
       if (el) {
         if (el.tagName === "TITLE") {
           document.title = originalText[id];
@@ -205,76 +216,84 @@ function applyTranslations(lang) {
     }
   }
 
-  // Swap the flag icon
+  // Update the flag to show the language that can be selected next
   const flagIcon = document.getElementById("flag-icon");
+
   if (flagIcon) {
     const nextLang = lang === "en" ? "es" : "en";
+
     flagIcon.src = nextLang === "en" ? "images/us.png" : "images/mx.png";
     flagIcon.alt = nextLang === "en" ? "US Flag" : "Mexican Flag";
   }
 }
 
-let currentLang = "en";
+// Toggle between English and Spanish
+function initTranslations() {
+  const translateButton = document.getElementById("translate-btn");
 
-document.addEventListener("DOMContentLoaded", () => {
-  cacheOriginalText(); // Cache English text at start
+  cacheOriginalText();
   applyTranslations(currentLang);
-});
 
-document.getElementById("translate-btn").addEventListener("click", () => {
-  currentLang = currentLang === "en" ? "es" : "en";
-  applyTranslations(currentLang);
-});
+  if (translateButton) {
+    translateButton.addEventListener("click", () => {
+      currentLang = currentLang === "en" ? "es" : "en";
+      applyTranslations(currentLang);
+    });
+  }
+}
 
-// hamburger menu
+/* Mobile Navigation / Hamburger Menu */
 
-document.addEventListener("DOMContentLoaded", function () {
+function initNavigation() {
   const toggleBtn = document.getElementById("nav-toggle");
   const navList = document.querySelector(".nav__list--primary");
 
-  if (toggleBtn && navList) {
-    toggleBtn.addEventListener("click", () => {
-      navList.classList.toggle("show");
-      const isOpen = navList.classList.contains("show");
-      toggleBtn.setAttribute("aria-expanded", isOpen);
+  if (!toggleBtn || !navList) return;
+
+  // Toggle the mobile navigation menu
+  toggleBtn.addEventListener("click", () => {
+    navList.classList.toggle("show");
+
+    const isOpen = navList.classList.contains("show");
+    toggleBtn.setAttribute("aria-expanded", isOpen);
+  });
+
+  // Close the menu when a navigation link is clicked
+  const navLinks = navList.querySelectorAll("a");
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navList.classList.remove("show");
     });
+  });
 
-    // Close menu when nav link is clicked (only after navList is confirmed)
+  // Close the menu when clicking outside of it
+  document.addEventListener("click", (event) => {
+    const isClickInsideMenu = navList.contains(event.target);
+    const isClickOnToggle = toggleBtn.contains(event.target);
 
-    const navLinks = navList.querySelectorAll("a");
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        navList.classList.remove("show");
-      });
-    });
+    if (!isClickInsideMenu && !isClickOnToggle) {
+      navList.classList.remove("show");
+    }
+  });
+}
 
-    //  Close menu when clicking outside
+/* Landing Page Animation */
 
-    document.addEventListener("click", (event) => {
-      const isClickInsideMenu = navList.contains(event.target);
-      const isClickOnToggle = toggleBtn.contains(event.target);
-
-      if (!isClickInsideMenu && !isClickOnToggle) {
-        navList.classList.remove("show");
-      }
-    });
-  }
-});
-
-// animation for landing page
-
-document.addEventListener('DOMContentLoaded', () => {
+function initLandingAnimation() {
   const hero = document.querySelector(".hero-container");
   const navbar = document.querySelector("header");
 
-  // Step 2: Fade to color
+  if (!hero || !navbar) return;
+
+  // Transition the hero image from black and white to color
   setTimeout(() => {
     hero.classList.add("step-color");
-  }, 300); // ~2s after BW fade starts
+  }, 300);
 
-  // Navbar show/hide on scroll
+  // Show or hide the navbar based on the current scroll position
   const updateNavbar = () => {
-    // Only run hide/show logic on desktop
+    // Only hide/show the navbar based on scroll position on desktop
     if (window.innerWidth > 768) {
       if (window.scrollY > 0) {
         navbar.classList.remove("hidden");
@@ -282,13 +301,23 @@ document.addEventListener('DOMContentLoaded', () => {
         navbar.classList.add("hidden");
       }
     } else {
-      // On mobile: always visible
+      // Keep the navbar visible on mobile
       navbar.classList.remove("hidden");
     }
   };
 
   window.addEventListener("scroll", updateNavbar);
-  window.addEventListener("resize", updateNavbar); // re-check on resize
-  updateNavbar(); // initial check on page load
-});
+  window.addEventListener("resize", updateNavbar);
 
+  // Set the correct initial navbar state
+  updateNavbar();
+}
+
+/* Initialize Page */
+
+document.addEventListener("DOMContentLoaded", () => {
+  initSmoothScrolling();
+  initTranslations();
+  initNavigation();
+  initLandingAnimation();
+});
